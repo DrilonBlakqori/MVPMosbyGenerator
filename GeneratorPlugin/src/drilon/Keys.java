@@ -1,4 +1,4 @@
-package com.drilon;
+package drilon;
 
 public enum Keys {
 	fragmentPackage,

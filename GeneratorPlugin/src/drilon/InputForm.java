@@ -1,4 +1,4 @@
-package com.drilon;
+package drilon;
 
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.ide.util.PropertiesComponentImpl;

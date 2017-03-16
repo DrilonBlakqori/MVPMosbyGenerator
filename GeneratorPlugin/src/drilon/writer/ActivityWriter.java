@@ -1,23 +1,23 @@
-package com.drilon.writer;
-
-import com.drilon.InputModel;
+package drilon.writer;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FragmentWriter {
+import drilon.InputModel;
+
+public class ActivityWriter {
 
 	private InputModel inputModel;
-
-	public FragmentWriter(InputModel inputModel) {
+	
+	public ActivityWriter(InputModel inputModel) {
 		this.inputModel = inputModel;
 	}
 
 	public void writeClasses() {
 		writeView();
 		writePresenter();
-		writeFragment();
+		writeActivity();
 		writeLayout();
 	}
 
@@ -69,7 +69,8 @@ public class FragmentWriter {
 		}
 	}
 
-	private void writeFragment() {
+
+	private void writeActivity() {
 
 		File folder = new File(inputModel.getProjectPath() + "\\" + inputModel.getActivityPackage());
 		if (!folder.exists()) {
@@ -77,33 +78,25 @@ public class FragmentWriter {
 		}
 		File file = new File(folder, inputModel.getClassName() + inputModel.getActivitySuffix() + ".java");
 		FileWriter fw;
-
 		try {
 			fw = new FileWriter(file);
 			fw.write("package " + inputModel.getPackageName() + "." + inputModel.getActivityPackage() + ";" +
 					"\n\n" +
 					"import android.os.Bundle;\n" +
 					"import android.support.annotation.NonNull;\n" +
-					"import android.support.annotation.Nullable;\n" +
-					"import android.view.LayoutInflater;\n" +
-					"import android.view.View;\n" +
-					"import android.view.ViewGroup;" +
-					"import android.support.annotation.NonNull;\n" +
 					"\n" +
 					"import " + inputModel.getPackageName() + ".R;\n" +
 					"import " + inputModel.getPackageName() + "." + inputModel.getViewPackage() + "." + inputModel.getClassName() + inputModel.getViewSuffix() + ";" + "\n" +
 					"import " + inputModel.getPackageName() + "." + inputModel.getPresenterPackage() + "." + inputModel.getClassName() + inputModel.getPresenterSuffix() + ";" + "\n" +
-					"import com.hannesdorfmann.mosby.mvp.MvpFragment;\n" +
-
+					"import com.hannesdorfmann.mosby.mvp.MvpActivity;\n" +
 					"\n" +
-					"public class " + inputModel.getClassName() + inputModel.getActivitySuffix() + " extends MvpFragment<" + inputModel.getClassName() + inputModel.getViewSuffix() + ", " + inputModel.getClassName() + inputModel.getPresenterSuffix() + ">\n" +
+					"public class " + inputModel.getClassName() + inputModel.getActivitySuffix() + " extends MvpActivity<" + inputModel.getClassName() + inputModel.getViewSuffix() + ", " + inputModel.getClassName() + inputModel.getPresenterSuffix() + ">\n" +
 					"\timplements " + inputModel.getClassName() + inputModel.getViewSuffix() + " {\n" +
-					"\t\n" +
-					"\t@Nullable\n" +
+					"\n" +
 					"\t@Override\n" +
-					"\tpublic View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {\n" +
-					"\t\tView view = inflater.inflate(R.layout." + inputModel.getLayoutName() + ", container, false);\n" +
-					"\t\treturn view;\n" +
+					"\tprotected void onCreate(Bundle savedInstanceState) {\n" +
+					"\t\tsuper.onCreate(savedInstanceState);\n" +
+					"\t\tsetContentView(R.layout." + inputModel.getLayoutName() + ");\n" +
 					"\t}" +
 					"\t\n" +
 					"\t@NonNull\n" +
@@ -151,3 +144,4 @@ public class FragmentWriter {
 		}
 	}
 }
+
