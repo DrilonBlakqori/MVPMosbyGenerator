@@ -1,0 +1,47 @@
+<idea-plugin version="2">
+  <id>com.drilon.mosby.mvp.generator</id>
+  <name>Mosby MVP generator</name>
+  <version>1.0</version>
+  <vendor email="drilon.blakqori@gmail.com">Drilon Blakqori</vendor>
+
+  <description><![CDATA[
+      A MVP Mosby activity generator.<br>
+    ]]></description>
+
+  <!--<change-notes>-->
+  <!--</change-notes>-->
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="145.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <actions>
+    <!-- Add your action here -->
+
+    <!--<action id="com.drilon.actionNewActivityAction" class="com.drilon.actionNewActivityAction"-->
+            <!--text="New MVP Activity">-->
+      <!--<add-to-group group-id="NewGroup" anchor="before" relative-to-action="Kotlin.NewFile"/>-->
+    <!--</action>-->
+    <action id="com.drilon.action.NewActivityAction" class="com.drilon.action.NewActivityAction"
+            text="New MVP Activity"
+            description="Create a new mvp activity with corresponding view and presenter">
+      <add-to-group group-id="NewGroup1" anchor="after" relative-to-action="NewClass"/>
+    </action>
+
+    <action id="com.drilon.action.NewFragmentAction" class="com.drilon.action.NewFragmentAction"
+            text="New MVP Fragment"
+            description="Create a new mvp fragment with corresponding view and presenter">
+      <add-to-group group-id="NewGroup1" anchor="after" relative-to-action="com.drilon.actions.NewActivityAction"/>
+    </action>
+  </actions>
+
+</idea-plugin>
